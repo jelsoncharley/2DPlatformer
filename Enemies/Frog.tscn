@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cpphvs2hbfcl3"]
+[gd_scene load_steps=23 format=3 uid="uid://cpphvs2hbfcl3"]
 
 [ext_resource type="Script" path="res://Enemies/Frog.gd" id="1_57ili"]
 [ext_resource type="Texture2D" uid="uid://dyese4j3l5amx" path="res://Assets/Packs/Sunnyland/spritesheets/frog-idle.png" id="1_836k3"]
@@ -83,7 +83,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Death",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -133,7 +133,10 @@ animations = [{
 radius = 90.0222
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_asiih"]
-size = Vector2(19, 12)
+size = Vector2(22, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8tgo"]
+size = Vector2(27, 7)
 
 [node name="Frog" type="CharacterBody2D"]
 script = ExtResource("1_57ili")
@@ -146,20 +149,27 @@ shape = SubResource("RectangleShape2D_d6hng")
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_7022d")
 animation = &"Idle"
-frame_progress = 0.526704
 
 [node name="Player Detection" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player Detection"]
+position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_vucfn")
 
 [node name="Death" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Death"]
-position = Vector2(-1.5, -6)
+position = Vector2(-1, -14)
 shape = SubResource("RectangleShape2D_asiih")
+
+[node name="Attack" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+position = Vector2(-1.5, -3.5)
+shape = SubResource("RectangleShape2D_n8tgo")
 
 [connection signal="area_entered" from="Player Detection" to="." method="_on_player_detection_area_entered"]
 [connection signal="body_entered" from="Player Detection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="Player Detection" to="." method="_on_player_detection_body_exited"]
 [connection signal="body_entered" from="Death" to="." method="_on_death_body_entered"]
+[connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]

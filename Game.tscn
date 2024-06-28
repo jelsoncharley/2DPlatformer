@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cnor1rkec75tu"]
+[gd_scene load_steps=12 format=3 uid="uid://cnor1rkec75tu"]
 
 [ext_resource type="PackedScene" uid="uid://t7wvvkp45pl2" path="res://Player/Character.tscn" id="1_0y2su"]
 [ext_resource type="Texture2D" uid="uid://c8o0wmslhhrqs" path="res://Assets/Packs/Sunnyland/environment/tileset.png" id="1_l8ec5"]
@@ -148,6 +148,20 @@ size = Vector2(199.5, 806.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ei3lq"]
 size = Vector2(1077, 249)
 
+[sub_resource type="GDScript" id="GDScript_6qjcm"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	text = \"HP: \" + str(get_node(\"../../Player/Character\").health)
+"
+
 [node name="Game" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -196,4 +210,31 @@ position = Vector2(142, 390)
 [node name="Mobs" type="Node2D" parent="."]
 
 [node name="Frog" parent="Mobs" instance=ExtResource("5_mw6mu")]
-position = Vector2(319, 398)
+position = Vector2(302, 317)
+
+[node name="Frog2" parent="Mobs" instance=ExtResource("5_mw6mu")]
+position = Vector2(431, 204)
+
+[node name="Frog3" parent="Mobs" instance=ExtResource("5_mw6mu")]
+position = Vector2(554, 303)
+
+[node name="Frog4" parent="Mobs" instance=ExtResource("5_mw6mu")]
+position = Vector2(686, 272)
+
+[node name="Frog5" parent="Mobs" instance=ExtResource("5_mw6mu")]
+position = Vector2(835, 317)
+
+[node name="Frog6" parent="Mobs" instance=ExtResource("5_mw6mu")]
+position = Vector2(990, 251)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HP" type="Label" parent="UI"]
+offset_left = 89.0
+offset_top = 125.0
+offset_right = 135.0
+offset_bottom = 159.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "HP: "
+script = SubResource("GDScript_6qjcm")
